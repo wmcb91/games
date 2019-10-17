@@ -1,0 +1,108 @@
+
+body {
+  overscroll-behavior: none;
+}
+
+main {
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.btn {
+  background-color: rgb(101, 169, 172);
+  border: 0;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1.25em;
+  margin: 5px;
+  min-width: 140px;
+  padding: 5px 15px;
+}
+
+.btn:active {
+  background-color: rgb(83, 149, 153);
+}
+
+.btn:active,
+.btn:focus {
+  outline: none;
+}
+
+.reset-scores {
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+}
+
+.favor-bar {
+  height: 4px;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.favor-bar > span {
+  position: absolute;
+  height: 4px;
+}
+
+.scoreboard {
+  font-size: 1.25em;
+}
+
+.scoreboard > div {
+  position: absolute;
+  left: 15px;
+  top: 15px;
+}
+
+.scoreboard > div:last-child {
+  left: unset;
+  right: 15px;
+}
+
+.text-area {
+  margin-top: 10px;
+  text-transform: capitalize;
+}
+
+.gameboard {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin: 30px auto;
+  height: 80vh;
+  width: 80vh;
+}
+
+.square {
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  box-sizing: border-box;
+  cursor: pointer;
+  height: 33.333%;
+  margin: 0;
+  font-size: 22vh;
+  text-transform: capitalize;
+  user-select: none;
+  width: 33.333%;
+}
+
+.square.winner.x,
+.favor-bar > .x {
+  background-color: #23af68;
+  right: 50%;
+}
+
+.square.winner.o,
+.favor-bar > .o {
+  background-color: #529bd6;
+  left: 50%;
+}
+
+.hidden {
+  display: none;
+}

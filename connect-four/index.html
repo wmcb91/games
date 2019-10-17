@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Connect 4</title>
+  <link type="text/css" rel="stylesheet" href="assets/main.css">
+</head>
+<body>
+  <main>
+    <h3>Connect 4</h3>
+    <button id="play-again" class="btn play-btn" disabled>Play Again</button>
+    <button id="undo" class="btn undo-btn">Undo</button>
+    <div id="game-area" class="game-area">
+      <div class="text-area">
+        <span id="win-msg"></span>
+      </div>
+      <div class="board-area">
+        <div id="token-hover-area" class="token-hover-area"></div>
+        <div id="board" class="board"></div>
+        <div class="leg left"></div>
+        <div class="leg right"></div>
+      </div>
+    </div>
+  </main>
+  <script type="text/javascript" src="./jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="assets/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Tic-Tac-Toe</title>
+  <link type="text/css" rel="stylesheet" href="assets/main.css">
+</head>
+<body>
+  <div id="favor-bar" class="favor-bar">
+    <span class="x"></span>
+    <span class="o"></span>
+  </div>
+  <main>
+    <button id="start-game" class="btn">Start Game</button>
+    <button id="sim-game" class="btn">Sim Game</button>
+    <button id="reset-scores" class="btn reset-scores">Reset Scores</button>
+    <div id="scoreboard" class="scoreboard">
+      <div id="player-x">
+        Player X: <span class="wins">0</span> Win<span class="plur">s</span>
+      </div>
+      <div id="player-o">
+        Player O: <span class="wins">0</span> Win<span class="plur">s</span>
+      </div>
+    </div>
+    <h2 class="text-area"></h2>
+    <div id="gameboard" class="gameboard hidden">
+      <div id="0" class="square"></div>
+      <div id="1" class="square"></div>
+      <div id="2" class="square"></div>
+      <div id="3" class="square"></div>
+      <div id="4" class="square"></div>
+      <div id="5" class="square"></div>
+      <div id="6" class="square"></div>
+      <div id="7" class="square"></div>
+      <div id="8" class="square"></div>
+    </div>
+  </main>
+
+  <script type="text/javascript" src="./jquery-3.3.1.min.js"></script>
+  <script type="text/javascript" src="assets/index.js"></script>
+</body>
+</html>
