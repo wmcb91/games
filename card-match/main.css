@@ -1,0 +1,65 @@
+body {
+  color: #222;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+header {
+  height: 80px;
+}
+
+header > h1 {
+  margin: 10px 0 0;
+  text-align: center;
+}
+
+.game-board {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  box-sizing: border-box;
+  height: 250px;
+  perspective: 1000px;
+  padding: 10px 20px;
+  width: 190px;
+}
+
+.card-flipper {
+  pointer-events: none;
+}
+
+.card.flipped > .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-inner  {
+  user-select: none;
+  transition: 0.5s;
+	transform-style: preserve-3d;
+	position: relative;
+}
+
+.card.paired {
+  opacity: 0.25;
+}
+
+.card-inner > .front, .card-inner  > .back {
+	backface-visibility: hidden;
+	position: absolute;
+	top: 0;
+  left: 0;
+  width: 150px;
+  -webkit-user-drag: none;
+}
+
+.card-inner > .front {
+  z-index: 2;
+  background: #fff;
+	transform: rotateY(0deg);
+}
+
+.card-inner > .back {
+	transform: rotateY(180deg);
+}
