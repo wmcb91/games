@@ -44,16 +44,8 @@ class Pokemon extends Component {
       <div className={className} onClick={this.startBattling}>
         <h4>{name}</h4>
         <img className="sprite" alt={name} src={sprites.front_default} />
-        <h5>
-          Available Move: {move.name.replace('-', ' ')}
-        </h5>
-        <h5>
-          Move Power: {move.power}
-        </h5>
-        <h5>
-          HP: {this.state.hpRemaining}
-          
-        </h5>
+        <h5>Available Move: {move.name.replace('-', ' ')} ({move.power} Power)</h5>
+        <h5>HP: {this.state.hpRemaining}</h5>
         <Progress style={{margin: '20px'}} percent={this.state.hpBarPercent} indicating /> 
       </div>
     );

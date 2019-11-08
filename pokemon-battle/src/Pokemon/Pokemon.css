@@ -13,7 +13,7 @@
 
 .Pokemon h4,
 .Pokemon h5 {
-  margin: 5px;
+  margin: 2px;
   text-transform: capitalize;
 }
 
@@ -56,5 +56,6 @@
 }
 
 .Pokemon .progress {
+  margin: 10px!important;
   width: 60%;
 }
