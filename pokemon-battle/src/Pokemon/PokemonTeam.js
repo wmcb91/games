@@ -9,8 +9,8 @@ class PokemonTeam extends Component {
   }
 
   render() {
-    const pokemons = this.props.team.map(pokemon => (
-      <Pokemon key={pokemon.id} pokemon={pokemon} />
+    const pokemons = this.props.team.map((pokemon, i) => (
+      <Pokemon key={pokemon.id + '-' + i} pokemon={pokemon} />
     ));
     const className = "Team " + this.props.side;
     return (

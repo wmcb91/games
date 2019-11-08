@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Progress } from 'semantic-ui-react';
-import pokemonIds from './pokemon';
-import PokemonTeam from './Pokemon/PokemonTeam';
+import pokemon from './pokemon';
+import nonDamageMoves from './nonDamageMoves';
+import Battleground from './Battleground';
 import './App.css';
 
 class App extends Component {
@@ -10,6 +11,7 @@ class App extends Component {
     this.state = {
       playersSelected: false,
       battleStarted: false,
+      battleReady: false,
       loading: false,
       loadingPercent: 0,
       playerOne: {
@@ -23,24 +25,51 @@ class App extends Component {
     }
   }
 
+  findMove = async (pokemon) => {
+    let powerMove = false;
+    let move = null;
+    pokemon.moves = pokemon.moves.filter(m => !nonDamageMoves.includes(m.name));
+    while (!powerMove) {
+      let pokemonMoveIdx = Math.floor(Math.random() * pokemon.moves.length);
+      if (pokemon.moves[pokemonMoveIdx].url) {
+        let pokemonMoveCall = await fetch(pokemon.moves[pokemonMoveIdx].url)
+        move = await pokemonMoveCall.json();
+        if (move.power) {
+          powerMove = true;
+        }
+      }
+    }
+    return {
+      accuracy: move.accuracy,
+      power: move.power,
+      pp: move.pp,
+      name: move.name
+    };
+  }
+
+  getRandPokemon = async () => {
+    // Remove ditto because it has no damage moves
+    const validPokemon = pokemon.filter(p => p.name !== 'ditto');
+    const pokemonCount = validPokemon.length;
+    let pokemonIdx = Math.floor(Math.random() * pokemonCount);
+    let poke = validPokemon[pokemonIdx];
+    poke.move = await this.findMove(poke);
+    return poke;
+  }
+
   startBattle = async () => {
-    const pokemonCount = pokemonIds.length;
     this.setState({
       loading: true
     })
     for (let i=0; i < 5; i++) {
-      let playerOnePokemonId = Math.ceil(Math.random() * pokemonCount);
-      let playerTwoPokemonId = Math.ceil(Math.random() * pokemonCount);
-      let playerOnePokemonReq = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${playerOnePokemonId}`
-      );
-      let playerTwoPokemonReq = await fetch(
-        `https://pokeapi.co/api/v2/pokemon/${playerTwoPokemonId}`
-      );
-      let playerOnePokemon = await playerOnePokemonReq.json();
-      let playerTwoPokemon = await playerTwoPokemonReq.json();
-      this.state.playerOne.pokemon.push(playerOnePokemon);
-      this.state.playerTwo.pokemon.push(playerTwoPokemon);
+      let pk1 = await this.getRandPokemon();
+      let pk2 = await this.getRandPokemon();
+      pk1.teamIdx = i;
+      pk1.startingHP = pk1.stats.find(s => s.stat.name === 'hp').base_stat * 2;
+      pk2.teamIdx = i;
+      pk2.startingHP = pk2.stats.find(s => s.stat.name === 'hp').base_stat * 2;
+      this.state.playerOne.pokemon.push(pk1);
+      this.state.playerTwo.pokemon.push(pk2);
       this.setState({
         loadingPercent: (i + 1) * 20,
         playerOne: {
@@ -54,35 +83,34 @@ class App extends Component {
       })
     }
     this.setState({
-      loading: false
+      loading: false,
+      battleReady: true
     })
   }
 
   render() {
-    const teamOnePokemon = this.state.playerOne.pokemon;
-    const teamTwoPokemon = this.state.playerTwo.pokemon;
-    const pokeTeams = (
-      <div className="battle-ground">
-        <PokemonTeam playerName={this.state.playerOne.name} team={teamOnePokemon} side={'left'}/>
-        <PokemonTeam playerName={this.state.playerTwo.name} team={teamTwoPokemon} side={'right'}/>
-      </div>
-    );
-    if (teamTwoPokemon.length > 4) {
-      console.log(teamTwoPokemon);
-    }
+
     return (
       <div className="App">
         <header className="App-header">
           <h3>Pokemon Battle</h3>
         </header>
         <main>
-          {!this.state.loading && teamTwoPokemon.length !== 5 ?
-          <Button content="Start Battle" primary onClick={this.startBattle} /> :
-          ''
+          {
+            !this.state.loading && !this.state.battleReady ?
+              <Button content="Start Battle" primary onClick={this.startBattle} /> :
+              ''
           }
-          {this.state.loading ? 
-            <Progress style={{margin: '20px'}} percent={this.state.loadingPercent} indicating /> : ''}
-          {!this.state.loading && teamTwoPokemon.length === 5 ? pokeTeams : ''}
+          {
+            this.state.loading ? 
+              <Progress style={{margin: '20px'}} percent={this.state.loadingPercent} indicating /> :
+              ''
+          }
+          {
+            !this.state.loading && this.state.battleReady ? 
+              <Battleground playerOne={this.state.playerOne} playerTwo={this.state.playerTwo} /> :
+              ''
+          }
         </main>
       </div>
     );
