@@ -8,7 +8,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 75px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,4 +19,10 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+
+main {
+  min-height: calc(100vh - 75px);
+  padding: 20px 50px;
 }

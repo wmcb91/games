@@ -1,0 +1,9 @@
+.battle-ground {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.Team {
+  box-sizing: border-box;
+  width: 50%;
+}

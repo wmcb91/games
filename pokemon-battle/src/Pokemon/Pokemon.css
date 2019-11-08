@@ -1,0 +1,31 @@
+
+.Pokemon {
+  border: 1px solid #333;
+  border-radius: 5px;
+  box-shadow: 1px 1px 0 0 rgba(50,50,50, 0.5);
+  padding: 5px;
+  margin: 10px;
+}
+
+.Pokemon h4 {
+  text-transform: capitalize;
+}
+
+.Pokemon .sprite {
+  position: relative;
+  left: 0;
+  right: 0;
+  transition: left .4s;
+}
+
+.left .Pokemon.battling .sprite {
+  position: relative;
+  left: 40%;
+  transition: left .4s;
+}
+
+.right .Pokemon.battling .sprite {
+  position: relative;
+  left: -40%;
+  transition: left .4s;
+}
