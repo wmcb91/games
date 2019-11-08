@@ -17,10 +17,13 @@ class Pokemon extends Component {
     let hpRemaining = Math.max(this.state.hpRemaining - this.props.pokemon.move.power, 0)
     let startingHP = this.props.pokemon.startingHP;
     this.setState({
-      battling: false,
       hpRemaining: hpRemaining,
       hpBarPercent: (hpRemaining / startingHP) * 100
     })
+
+    setTimeout(this.setState({
+      battling: false
+    }), 300);
   }
 
   startBattling = () => {

@@ -94,7 +94,7 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <h3>Pokemon Battle</h3>
+          <h3>{this.state.battleReady ? 'Every Pokemon is Confused' : 'Pokemon Battle'}</h3>
         </header>
         <main>
           {
@@ -108,7 +108,7 @@ class App extends Component {
               ''
           }
           {
-            !this.state.loading && this.state.battleReady ? 
+            this.state.battleReady ? 
               <Battleground playerOne={this.state.playerOne} playerTwo={this.state.playerTwo} /> :
               ''
           }
