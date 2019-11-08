@@ -43,7 +43,7 @@ class App extends Component {
       accuracy: move.accuracy,
       power: move.power,
       pp: move.pp,
-      name: move.name
+      name: move.name,
     };
   }
 
@@ -66,8 +66,10 @@ class App extends Component {
       let pk2 = await this.getRandPokemon();
       pk1.teamIdx = i;
       pk1.startingHP = pk1.stats.find(s => s.stat.name === 'hp').base_stat * 2;
+      pk1.hpBarPercent = 100;
       pk2.teamIdx = i;
       pk2.startingHP = pk2.stats.find(s => s.stat.name === 'hp').base_stat * 2;
+      pk1.hpBarPercent = 100;
       this.state.playerOne.pokemon.push(pk1);
       this.state.playerTwo.pokemon.push(pk2);
       this.setState({
@@ -89,7 +91,6 @@ class App extends Component {
   }
 
   render() {
-
     return (
       <div className="App">
         <header className="App-header">
