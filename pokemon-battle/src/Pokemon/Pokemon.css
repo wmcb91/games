@@ -30,6 +30,19 @@
   transition: left .3s ease-out;
 }
 
+.left .Pokemon {
+  background: #076585; /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #076585, #86c1e2); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #076585,#86c1e2); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.right .Pokemon {
+  background: #D66D75;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #E29587, #D66D75);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #E29587, #D66D75); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
 .left .Pokemon.battling .sprite {
   position: relative;
   left: 40%;
