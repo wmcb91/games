@@ -17,6 +17,12 @@
   text-transform: capitalize;
 }
 
+.Pokemon.unconcious {
+  opacity: .4;
+  pointer-events: none;
+  user-select: none;
+}
+
 .Pokemon .sprite {
   position: relative;
   left: 0;

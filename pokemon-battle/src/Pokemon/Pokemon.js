@@ -37,7 +37,9 @@ class Pokemon extends Component {
     const { name, sprites, move } = this.props.pokemon;
     // console.log(this.props.pokemon)
     
-    const className = 'Pokemon' + (this.state.battling ? ' battling' : '');
+    const className = 'Pokemon' + 
+      (this.state.battling ? ' battling' : '') +
+      (this.state.hpRemaining ? '' : ' unconcious');
     return (
       <div className={className} onClick={this.startBattling}>
         <h4>{name}</h4>
