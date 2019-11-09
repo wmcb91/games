@@ -66,10 +66,12 @@ class App extends Component {
       let pk2 = await this.getRandPokemon();
       pk1.teamIdx = i;
       pk1.startingHP = pk1.stats.find(s => s.stat.name === 'hp').base_stat * 2;
+      pk1.hpRemaining = pk1.startingHP;
       pk1.hpBarPercent = 100;
       pk2.teamIdx = i;
       pk2.startingHP = pk2.stats.find(s => s.stat.name === 'hp').base_stat * 2;
-      pk1.hpBarPercent = 100;
+      pk2.hpRemaining = pk2.startingHP;
+      pk2.hpBarPercent = 100;
       this.state.playerOne.pokemon.push(pk1);
       this.state.playerTwo.pokemon.push(pk2);
       this.setState({
@@ -105,12 +107,14 @@ class App extends Component {
           {
             this.state.loading ? 
               <Progress style={{margin: '20px'}} percent={this.state.loadingPercent} indicating /> :
-              ''
+              null
           }
           {
             this.state.battleReady ? 
-              <Battleground playerOne={this.state.playerOne} playerTwo={this.state.playerTwo} /> :
-              ''
+              <Battleground 
+                playerOne={this.state.playerOne} 
+                playerTwo={this.state.playerTwo}
+              /> : null
           }
         </main>
       </div>
