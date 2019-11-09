@@ -26,7 +26,6 @@ class Battleground extends Component {
       }
     })
   }
-  
 
   render() {
     return (

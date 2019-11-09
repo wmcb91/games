@@ -52,7 +52,7 @@ class App extends Component {
     const validPokemon = pokemon.filter(p => p.name !== 'ditto');
     const pokemonCount = validPokemon.length;
     let pokemonIdx = Math.floor(Math.random() * pokemonCount);
-    let poke = validPokemon[pokemonIdx];
+    let poke = JSON.parse(JSON.stringify(validPokemon[pokemonIdx]));
     poke.move = await this.findMove(poke);
     return poke;
   }
@@ -61,21 +61,31 @@ class App extends Component {
     this.setState({
       loading: true
     })
-    for (let i=0; i < 5; i++) {
+
+    const p1PokeNames = [];
+    const p2PokeNames = [];
+
+    while (this.state.playerOne.pokemon.length < 5 && this.state.playerTwo.pokemon.length < 5) {
       let pk1 = await this.getRandPokemon();
       let pk2 = await this.getRandPokemon();
-      pk1.teamIdx = i;
       pk1.startingHP = pk1.stats.find(s => s.stat.name === 'hp').base_stat * 2;
       pk1.hpRemaining = pk1.startingHP;
       pk1.hpBarPercent = 100;
-      pk2.teamIdx = i;
       pk2.startingHP = pk2.stats.find(s => s.stat.name === 'hp').base_stat * 2;
       pk2.hpRemaining = pk2.startingHP;
       pk2.hpBarPercent = 100;
-      this.state.playerOne.pokemon.push(pk1);
-      this.state.playerTwo.pokemon.push(pk2);
+
+      if (!p1PokeNames.includes(pk1.name)) {
+        this.state.playerOne.pokemon.push(pk1);
+        p1PokeNames.push(pk1.name);
+      }
+      if (!p2PokeNames.includes(pk2.name)) {
+        this.state.playerTwo.pokemon.push(pk2);
+        p2PokeNames.push(pk2.name);
+      }
+      
       this.setState({
-        loadingPercent: (i + 1) * 20,
+        loadingPercent: (this.state.playerTwo.pokemon.length + 1) * 20,
         playerOne: {
           name: this.state.playerOne.name,
           pokemon: this.state.playerOne.pokemon
